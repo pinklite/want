@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<project name="networktest" default="build.war" basedir=".">
+
+
+	<!-- ************** CONFIGURE THESE PROPERTIES ONLY ************** -->
+
+	<!-- Absolute path to the (Windows or Linux) GWT 2.6.1 SDK installation directory. -->
+	<!-- Windows -->
+	<property name="gwt.sdk" location="C:\gwt-2.6.1" />
+	<!-- Linux 
+	<property name="gwt.sdk" location="/home/jdoe/Google/gwt-2.6.1" /> 
+	-->
+
+	<!-- Absolute path to the (Windows or Linux) appvet-dhs source distribution -->
+	<!-- Windows -->
+	<property name="appvet.root" location="C:\test\workspace-luna-jee\networktest" /> 
+	<!-- Linux 
+	<property name="appvet.root" location="/home/test/git/appvet-dhs" /> 
+	-->
+
+	<!-- **************  DO NOT CHANGE BELOW HERE ************** -->
+
+	<property name="dist" location="${appvet.root}/dist" />
+	<property name="appvet.src" location="${appvet.root}/src" />
+	<property name="appvet.gwt.module" location="${appvet.src}/gov/nist/appvet/gwt" />
+	<property name="war" location="${appvet.root}/war" />
+	<property name="web.inf" location="${war}/WEB-INF" />
+	<property name="lib" value="${web.inf}/lib" />
+	<property name="appvet.classes" value="${web.inf}/classes" />
+	<property name="war.name" value="carwash" />
+	<property name="gwt.args" value="" />
+
+	<path id="project.class.path">
+		<fileset dir="${appvet.gwt.module}">
+			<include name="appvet.gwt.xml" />
+		</fileset>
+		<fileset dir="${appvet.src}">
+			<include name="**/*.java" />
+			<include name="**/*.xml" />
+		</fileset>
+		<fileset dir="${lib}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${gwt.sdk}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${appvet.classes}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="libs" description="Copy libs to WEB-INF/lib">
+		<!-- Refresh appvet class files -->
+		<delete dir="${appvet.classes}" />
+		<mkdir dir="${appvet.classes}" />
+		<!-- Refresh dist and appvet.war files -->
+		<delete dir="${dist}" />
+		<mkdir dir="${dist}" />
+		<mkdir dir="${lib}" />
+	</target>
+
+	<target name="javac" depends="libs" description="Compile java source to bytecode">
+		<javac includeantruntime="false" srcdir="${appvet.src}" destdir="${appvet.classes}"
+			includes="**" encoding="utf-8"  
+			source="1.8" target="1.8">
+
+			<classpath refid="project.class.path" />
+		</javac>
+	</target>
+
+	<target name="gwtc" depends="javac" description="GWT compile to JavaScript (production mode)">
+		<java failonerror="true" fork="true" classname="com.google.gwt.dev.Compiler">
+			<classpath>
+				<path refid="project.class.path"/>
+				<pathelement location="${appvet.src}"/>
+				<pathelement location="${appvet.gwt.module}"/>
+			</classpath>
+			<jvmarg value="-Xmx256M" />
+			<arg line="-war" />
+			<arg value="appvetwar" />
+			<arg line=" " />
+			<arg value="gov.nist.appvet.gwt.appvet" />
+		</java>
+	</target>
+
+	<target name="build.war" depends="gwtc">
+		<war destfile="${dist}/${war.name}.war" webxml="${web.inf}/web.xml">
+			<fileset dir="${war}">
+				<include name="**/*.*"/>
+			</fileset>
+			<classes dir="${appvet.classes}"/>
+			<lib dir="${lib}"/>
+		</war>
+	</target>
+</project>

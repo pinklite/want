@@ -1,0 +1,127 @@
+.shadow {
+	-webkit-box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.mainPanel {
+	font-family: arial;
+	background-color: white;
+}
+
+.headerPanel {
+	color: white;
+	background-color: #015289;
+	font-family: arial;
+	font-size: 30px;
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-bottom: 10px;
+	padding-right: 5px;
+}
+
+.headerStyle2 {
+	font-family: arial;
+	font-size: 30px;
+	padding-left: 5px;
+}
+
+.headerStyle3 {
+	padding-left: 5px;
+	font-family: arial;
+	font-style: italic;
+}
+
+.gwt-PushButton gwt-PushButton-up {
+	color: black;
+}
+
+.captionPanel {
+	color: black;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin: 5px;
+}
+
+.myButton {
+	color: black;
+}
+
+.rowStyle {
+	color: black;
+}
+
+.largeNumber {
+	font-size: 46px;
+}
+
+.ipPanel {
+	color: black;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.statusPanel {
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+.blackBox {
+	color: black;
+	background-color: white;
+}
+
+.gwt-Label ipPanel blackBox {
+	border-top: black;
+	border-right: black;
+	border-bottom: 1px solid black;
+	border-left: black;
+}
+
+h2 {
+	color: black;
+	font-size: 14px;
+}
+
+.latencyStyle {
+	font-size: 12px;
+}
+
+.valueHeader {
+	font-size: 16px;
+}
+
+.myTextArea {
+	background-color: black;
+	color: white;
+	font-family: arial;
+	font-size: 12px;
+	margin: 5px;
+}
+
+.myButton2 {
+	color: black;
+	margin-right: 5px;
+}
+
+.boxsizingBorder {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.borderStyle {
+	border-color: gray;
+	border-style: solid;
+	border-width: 1px;
+}
+
+.valuePadding {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.gwt-TextArea {
+	font-family : arial !important;
+	font-size : 10pt !important;
+}

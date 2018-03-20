@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- When updating your version of GWT, you should also update this DTD reference, 
+	so that your app can take advantage of the latest GWT module capabilities. -->
+
+<!-- NOTE: DTD for 2.6.1 is not available at the following URL! -->
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.6.1//EN"
+  "http://google-web-toolkit.googlecode.com/svn/tags/2.5.1/distro-source/core/src/gwt-module.dtd">
+
+<module rename-to='want'>
+	<!-- Inherit the core Web Toolkit stuff. -->
+	<inherits name='com.google.gwt.user.User' />
+
+	<!-- GWT CLIENT LOGGING <inherits name="com.google.gwt.logging.Logging"/> -->
+	<!-- Inherit the default GWT style sheet. You can change -->
+	<!-- the theme of your GWT application by uncommenting -->
+	<!-- any one of the following lines. -->
+	 <inherits name='com.google.gwt.user.theme.clean.Clean' /> 
+	<!-- <inherits name='com.google.gwt.user.theme.standard.Standard'/> -->
+	<!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
+	<!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/> -->
+
+	<!-- Logging in browser Javascript console (GWT client logging only). Note 
+		that this actually uses java.util.Logging. -->
+	<inherits name="com.google.gwt.logging.Logging" />
+
+	<!-- The following disables the GWT popup log window but still displays 
+		all client GWT log statements in the browser's Javascript console. You do 
+		not need to add the GWT browser plug in for viewing GWT client log statements. -->
+	<set-property name="gwt.logging.popupHandler" value="DISABLED" />
+
+
+	<!-- Specify the app entry point class. -->
+	<entry-point class='gov.dhs.nettester.gwt.client.NetTester' />
+
+	<!-- Specify the paths for translatable code -->
+	<source path='client' />
+	<source path='shared' />
+
+	<!-- English language, independent of country -->
+	<extend-property name="locale" values="en" />
+	<set-property-fallback name="locale" value="en" />
+
+	<!-- Use default xsdiframe linker. This linker generates an iFrame that is visible when CSS is turned off. 
+	To remove this iFrame, use xs linker (which may increase risk of Javascript security issues) -->
+ 	<add-linker name="xsiframe" /> 
+	
+	<!-- THE FOLLOWING DOES NOT WORK! IT GIVES AN ERROR THAT SSO MUST HAVE EXACTLY 
+		ONE DISTINCT PERMUTATION, BUT THIS HAS MORE THAN 4. -->
+	<!-- <add-linker name="sso"/> -->
+	<!-- THE FOLLOWING WORKS TO REMOVE HIDDEN BOX BUT REBUILDING WORKSPACE TAKES LONGER 
+	AND CAN RUN OUT OF MEMORY -->
+	<!-- <add-linker name="xs"/> -->
+</module>
