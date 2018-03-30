@@ -71,7 +71,7 @@ public class TesterPanel extends DockLayoutPanel {
 
 	private static final String VERSION = "1.0a";
 	public Logger log = Logger.getLogger("TesterPanel");
-	private final GWTServiceAsync appVetService = GWT.create(GWTService.class);
+	private final GWTServiceAsync wantService = GWT.create(GWTService.class);
 	private String hostUrl = null;
 	private Timer pollingTimer = null;
 	private Label statusLabel = null;
@@ -188,6 +188,7 @@ public class TesterPanel extends DockLayoutPanel {
 		lblUsername.setHeight("");
 
 		uTextBox = new TextBox();
+		uTextBox.setText("want");
 		horizontalPanel_4.add(uTextBox);
 		horizontalPanel_4.setCellVerticalAlignment(uTextBox,
 				HasVerticalAlignment.ALIGN_MIDDLE);
@@ -201,7 +202,7 @@ public class TesterPanel extends DockLayoutPanel {
 				HasVerticalAlignment.ALIGN_MIDDLE);
 
 		pTextBox = new PasswordTextBox();
-		pTextBox.setText("");
+		pTextBox.setText("want");
 		horizontalPanel_4.add(pTextBox);
 		pTextBox.setSize("150px", "10px");
 		horizontalPanel_4.setCellVerticalAlignment(pTextBox,
@@ -1032,7 +1033,7 @@ public class TesterPanel extends DockLayoutPanel {
 		hidden.setValue(u);
 
 		String p = pTextBox.getText();
-		appVetService.au(u, p, new AsyncCallback<String>() {
+		wantService.au(u, p, new AsyncCallback<String>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -1075,7 +1076,7 @@ public class TesterPanel extends DockLayoutPanel {
 		statusLabel.setText("Status: Running");
 		statusLabel.getElement().getStyle().setColor("#00ff00");
 
-		appVetService.sendMsg(msg, payload, new AsyncCallback<String>() {
+		wantService.sendMsg(msg, payload, new AsyncCallback<String>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
