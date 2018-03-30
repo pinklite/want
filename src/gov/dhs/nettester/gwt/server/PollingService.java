@@ -39,74 +39,77 @@ public class PollingService extends RemoteServiceServlet implements GWTService {
 
 	private static final long serialVersionUID = 1L;
 	public static SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSS");
-	private static String NETTESTER_HOME = null;
+//	private static String NETTESTER_HOME = null;
 	//public static Logger log = null;
 	public static HashMap<String, String> hashmap = null;
 
-	static {
-		NETTESTER_HOME = System.getenv("NETTESTER_HOME");
-		if (NETTESTER_HOME == null) {
-			System.err.println("Environment variable NETTESTER_HOME not set.");
-		} else {
-			System.out.println("Environment variable NETTESTER_HOME set: " + NETTESTER_HOME);
-
-			// Make sure user file exists. If not, create it.
-			File usersFile = new File(NETTESTER_HOME + "/nettester_users.txt");
-			if (usersFile.exists()) {
-				// Load creds
-				hashmap = new HashMap<String,String>();  
-				BufferedReader br = null;
-				FileReader fr = null;
-				try {
-					fr = new FileReader(usersFile);
-					br = new BufferedReader(fr);
-					String line = null;
-					while ((line = br.readLine()) != null) {
-						String[] creds = line.split("\\s+");
-						hashmap.put(creds[0],  creds[1]);
-					}
-					br.close();
-				} catch (Exception e) {
-					System.err.println(e.getMessage());
-				} finally {
-					if (fr != null) {
-						try {
-							fr.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-						fr = null;
-					}
-					if (br != null) {
-						try {
-							br.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-						br = null;
-					}
-				}
-			} else {
-				try {
-					usersFile.createNewFile();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
+//	static {
+//		NETTESTER_HOME = System.getenv("NETTESTER_HOME");
+//		if (NETTESTER_HOME == null) {
+//			System.err.println("Environment variable NETTESTER_HOME not set.");
+//		} else {
+//			System.out.println("Environment variable NETTESTER_HOME set: " + NETTESTER_HOME);
+//
+//			// Make sure user file exists. If not, create it.
+//			File usersFile = new File(NETTESTER_HOME + "/nettester_users.txt");
+//			if (usersFile.exists()) {
+//				// Load creds
+//				hashmap = new HashMap<String,String>();  
+//				BufferedReader br = null;
+//				FileReader fr = null;
+//				try {
+//					fr = new FileReader(usersFile);
+//					br = new BufferedReader(fr);
+//					String line = null;
+//					while ((line = br.readLine()) != null) {
+//						String[] creds = line.split("\\s+");
+//						hashmap.put(creds[0],  creds[1]);
+//					}
+//					br.close();
+//				} catch (Exception e) {
+//					System.err.println(e.getMessage());
+//				} finally {
+//					if (fr != null) {
+//						try {
+//							fr.close();
+//						} catch (IOException e) {
+//							e.printStackTrace();
+//						}
+//						fr = null;
+//					}
+//					if (br != null) {
+//						try {
+//							br.close();
+//						} catch (IOException e) {
+//							e.printStackTrace();
+//						}
+//						br = null;
+//					}
+//				}
+//			} else {
+//				try {
+//					usersFile.createNewFile();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//	}
 
 	@Override
+	/** Authenticate against hardcoded credentials. Developer can extend to provide
+	 * more robust authentication.
+	 */
 	public String au(String u, String p) throws IllegalArgumentException {
 		if (u == null || u.isEmpty() || p == null || p.isEmpty()) {
 			return null;
 		}
-		String pStored = hashmap.get(u);
-		if (pStored == null || pStored.isEmpty()) {
-			System.out.println("[NETTESTER] Attempted login by unknown user: " + u + ". Aborting.");
-			return null;
-		}
-		if (pStored.equals(p)) {
+//		String pStored = hashmap.get(u);
+//		if (pStored == null || pStored.isEmpty()) {
+//			System.out.println("[NETTESTER] Attempted login by unknown user: " + u + ". Aborting.");
+//			return null;
+//		}
+		if (u.equals("want") && p.equals("want")) {
 			System.out.println("[NETTESTER] User: " + u + " logged in.");
 			String clientIp = getThreadLocalRequest().getRemoteAddr();
 			return clientIp;
