@@ -5,37 +5,37 @@
 
 	<!-- ************** CONFIGURE THESE PROPERTIES ONLY ************** -->
 
-	<!-- Absolute path to the (Windows or Linux) GWT 2.6.1 SDK installation directory. -->
+	<!-- Absolute path to the GWT 2.6.1 SDK installation directory. -->
 	<!-- Windows -->
-	<property name="gwt.sdk" location="C:\gwt-2.6.1" />
+	<property name="gwt.sdk" location="C:\Google\gwt-2.6.1" />
 	<!-- Linux 
 	<property name="gwt.sdk" location="/home/jdoe/Google/gwt-2.6.1" /> 
 	-->
 
-	<!-- Absolute path to the (Windows or Linux) appvet-dhs source distribution -->
+	<!-- Absolute path to the want source distribution -->
 	<!-- Windows -->
-	<property name="appvet.root" location="C:\test\workspace-luna-jee\networktest" /> 
+	<property name="want.root" location="C:\ECLIPSES-ALL\WORKSPACES-ALL\luna\want" /> 
 	<!-- Linux 
-	<property name="appvet.root" location="/home/test/git/appvet-dhs" /> 
+	<property name="want.root" location="/home/test/git/want" /> 
 	-->
 
 	<!-- **************  DO NOT CHANGE BELOW HERE ************** -->
 
-	<property name="dist" location="${appvet.root}/dist" />
-	<property name="appvet.src" location="${appvet.root}/src" />
-	<property name="appvet.gwt.module" location="${appvet.src}/gov/nist/appvet/gwt" />
-	<property name="war" location="${appvet.root}/war" />
+	<property name="dist" location="${want.root}/dist" />
+	<property name="want.src" location="${want.root}/src" />
+	<property name="want.gwt.module" location="${want.src}/gov/dhs/nettester/gwt" />
+	<property name="war" location="${want.root}/war" />
 	<property name="web.inf" location="${war}/WEB-INF" />
 	<property name="lib" value="${web.inf}/lib" />
-	<property name="appvet.classes" value="${web.inf}/classes" />
-	<property name="war.name" value="carwash" />
+	<property name="want.classes" value="${web.inf}/classes" />
+	<property name="war.name" value="want" />
 	<property name="gwt.args" value="" />
 
 	<path id="project.class.path">
-		<fileset dir="${appvet.gwt.module}">
-			<include name="appvet.gwt.xml" />
+		<fileset dir="${want.gwt.module}">
+			<include name="want.gwt.xml" />
 		</fileset>
-		<fileset dir="${appvet.src}">
+		<fileset dir="${want.src}">
 			<include name="**/*.java" />
 			<include name="**/*.xml" />
 		</fileset>
@@ -45,23 +45,23 @@
 		<fileset dir="${gwt.sdk}">
 			<include name="**/*.jar" />
 		</fileset>
-		<fileset dir="${appvet.classes}">
+		<fileset dir="${want.classes}">
 			<include name="**/*.jar" />
 		</fileset>
 	</path>
 
 	<target name="libs" description="Copy libs to WEB-INF/lib">
-		<!-- Refresh appvet class files -->
-		<delete dir="${appvet.classes}" />
-		<mkdir dir="${appvet.classes}" />
-		<!-- Refresh dist and appvet.war files -->
+		<!-- Refresh want class files -->
+		<delete dir="${want.classes}" />
+		<mkdir dir="${want.classes}" />
+		<!-- Refresh dist and want.war files -->
 		<delete dir="${dist}" />
 		<mkdir dir="${dist}" />
 		<mkdir dir="${lib}" />
 	</target>
 
 	<target name="javac" depends="libs" description="Compile java source to bytecode">
-		<javac includeantruntime="false" srcdir="${appvet.src}" destdir="${appvet.classes}"
+		<javac includeantruntime="false" srcdir="${want.src}" destdir="${want.classes}"
 			includes="**" encoding="utf-8"  
 			source="1.8" target="1.8">
 
@@ -73,14 +73,14 @@
 		<java failonerror="true" fork="true" classname="com.google.gwt.dev.Compiler">
 			<classpath>
 				<path refid="project.class.path"/>
-				<pathelement location="${appvet.src}"/>
-				<pathelement location="${appvet.gwt.module}"/>
+				<pathelement location="${want.src}"/>
+				<pathelement location="${want.gwt.module}"/>
 			</classpath>
 			<jvmarg value="-Xmx256M" />
 			<arg line="-war" />
-			<arg value="appvetwar" />
+			<arg value="want" />
 			<arg line=" " />
-			<arg value="gov.nist.appvet.gwt.appvet" />
+			<arg value="gov.dhs.nettester.gwt.nettester" />
 		</java>
 	</target>
 
@@ -89,7 +89,7 @@
 			<fileset dir="${war}">
 				<include name="**/*.*"/>
 			</fileset>
-			<classes dir="${appvet.classes}"/>
+			<classes dir="${want.classes}"/>
 			<lib dir="${lib}"/>
 		</war>
 	</target>
