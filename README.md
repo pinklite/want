@@ -8,19 +8,12 @@ The Web App Network Tester (WANT) is a web application that tests for network is
 
 ## Requirements
 
-To run WANT, download and install the following:
-
 * JDK 1.8
 * Apache Tomcat 8.x (or other web service engine)
 
-To build WANT, download and install the following:
-
-* GWT SDK (tested using GWT SDK 2.6.1)
-* Apache Ant (for building only)
-
 ## Installation
 
-Select the `release` tab above and download the latest release of the `want.war` file into your Apache Tomcat `/webapps` directory. Start Tomcat and open a browser to `http://<host:port>/want` to view the WANT application.
+Download the (latest release)[https://github.com/dhs-gov/want/releases] of the `want.war` file and place into your Apache Tomcat `/webapps` directory. Start Tomcat and open a browser to `http://<host:port>/want`.
 
 ## Build
 
